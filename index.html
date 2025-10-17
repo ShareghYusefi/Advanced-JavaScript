@@ -10,25 +10,39 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <style>
-      .form-signin {
-        max-width: 330px;
-        padding: 10px;
+    <script>
+      function signIn(event) {
+        // We can use the document object to access the html document form
+        console.log(document.form);
+
+        var form = document.forms["sign-in-form"];
+
+        // get the form data
+        var email = form["email"].value;
+        var password = form["password"].value;
+
+        // submit the data to a database
+        console.log("Email: ", email);
+        console.log("Password: ", password);
+
+        // prevent the default form submission to the current page/reload
+        event.preventDefault();
       }
-    </style>
+    </script>
   </head>
   <body>
-    <main class="form-signin m-auto">
-      <form>
+    <main class="container">
+      <!-- Without the action attribute, the form will submit to the same page -->
+      <!-- We can use the onsubmit attribute to call a function for handling the submission event -->
+      <form name="sign-in-form" onsubmit="signIn(event)">
         <h1>Please Sign in</h1>
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label"
-            >Email address</label
-          >
+          <label for="email" class="form-label">Email address</label>
           <input
+            name="email"
             type="email"
             class="form-control"
-            id="exampleInputEmail1"
+            id="email"
             aria-describedby="emailHelp"
           />
           <div id="emailHelp" class="form-text">
@@ -36,11 +50,12 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <label for="password" class="form-label">Password</label>
           <input
+            name="password"
             type="password"
             class="form-control"
-            id="exampleInputPassword1"
+            id="password"
           />
         </div>
         <div class="mb-3 form-check">
