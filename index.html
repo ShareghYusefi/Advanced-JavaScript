@@ -12,6 +12,9 @@
     />
     <script>
       function signIn(event) {
+        // prevent the default form submission to the current page/reload
+        event.preventDefault();
+
         // We can use the document object to access the html document form
         console.log(document.form);
 
@@ -21,12 +24,40 @@
         var email = form["email"].value;
         var password = form["password"].value;
 
+        // create div element with id of 'message'
+        var div = document.createElement("div");
+        // add attribute to element
+        div.setAttribute("id", "message");
+        // update the text value of div element
+        // div.textContent = `You have signed in as ${email}!`;
+        // append the div element to the body of document
+        document.body.appendChild(div);
+
+        // validate form data before displaying
+        if (email.trim() === "" || password.trim() === "") {
+          div.textContent = "Please fill out all fields.";
+          // adding style to elements
+          div.style.color = "red";
+          // return early in function to exit here
+          return;
+        }
+
+        if (password.length < 6) {
+          div.textContent = "Password must be at least 6 characters.";
+          // adding style to elements
+          div.style.color = "red";
+          return;
+        }
+
+        // retrieving elements using the following methods/functions:
+        // getElementByID, getElementsByClassName, getElementsByTagName, querySelector, querySelectorAll
+        var divByID = document.getElementById("message");
+        var divByQuerySelector = document.querySelector("#message");
+        divByID.textContent = `You have signed in as ${email}!`;
+
         // submit the data to a database
         console.log("Email: ", email);
         console.log("Password: ", password);
-
-        // prevent the default form submission to the current page/reload
-        event.preventDefault();
       }
     </script>
   </head>
