@@ -10,62 +10,18 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <script>
-      function signIn(event) {
-        // prevent the default form submission to the current page/reload
-        event.preventDefault();
-
-        // We can use the document object to access the html document form
-        console.log(document.form);
-
-        var form = document.forms["sign-in-form"];
-
-        // get the form data
-        var email = form["email"].value;
-        var password = form["password"].value;
-
-        // create div element with id of 'message'
-        var div = document.createElement("div");
-        // add attribute to element
-        div.setAttribute("id", "message");
-        // update the text value of div element
-        // div.textContent = `You have signed in as ${email}!`;
-        // append the div element to the body of document
-        document.body.appendChild(div);
-
-        // validate form data before displaying
-        if (email.trim() === "" || password.trim() === "") {
-          div.textContent = "Please fill out all fields.";
-          // adding style to elements
-          div.style.color = "red";
-          // return early in function to exit here
-          return;
-        }
-
-        if (password.length < 6) {
-          div.textContent = "Password must be at least 6 characters.";
-          // adding style to elements
-          div.style.color = "red";
-          return;
-        }
-
-        // retrieving elements using the following methods/functions:
-        // getElementByID, getElementsByClassName, getElementsByTagName, querySelector, querySelectorAll
-        var divByID = document.getElementById("message");
-        var divByQuerySelector = document.querySelector("#message");
-        divByID.textContent = `You have signed in as ${email}!`;
-
-        // submit the data to a database
-        console.log("Email: ", email);
-        console.log("Password: ", password);
-      }
-    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+      integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="main.js"></script>
   </head>
   <body>
     <main class="container">
       <!-- Without the action attribute, the form will submit to the same page -->
       <!-- We can use the onsubmit attribute to call a function for handling the submission event -->
-      <form name="sign-in-form" onsubmit="signIn(event)">
+      <form name="sign-in-form"">
         <h1>Please Sign in</h1>
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
