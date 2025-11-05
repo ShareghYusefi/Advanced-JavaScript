@@ -18,8 +18,33 @@ $(document).ready(function () {
     var password = $("#password").val();
     console.log(email, password);
 
-    // add a div element with id of message to body  using .append()
-    $("body").append(`<div id='message'>You have signed in as ${email}</div>`);
+    // validate form data before displaying
+    if (email.trim() === "" || password.trim() === "") {
+      $("body").append(
+        `<div id='message' class='alert alert-danger mt-2'>Please fill out all fields.</div>`
+      );
+      // return early in function to exit here
+      return;
+    }
+
+    if (password.length < 6) {
+      $("body").append(
+        `<div id='message' class='alert alert-danger mt-2'>Password must be at least 6 characters.</div>`
+      );
+      return;
+    }
+
+    // submit data to API
+    $.ajax({
+      method: "POST",
+      url: "http://localhost:3000/api/login",
+      data: { email, password }, // {email: email, password: password}
+    }).done(function (msg) {
+      // add a div element with id of message to body  using .append()
+      $("body").append(`<div id='message'>${msg}</div>`);
+      // update the class list of message div
+      $("#message").addClass("alert alert-success mt-2");
+    });
   });
 });
 
